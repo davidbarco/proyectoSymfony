@@ -1,0 +1,49 @@
+ 
+{% if tasks|length >= 1 %}
+ 
+ <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tarea</th>
+      <th scope="col">Prioridad</th>
+      <th scope="col">Horas Presupuestadas</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+   {% for task in tasks %}
+  <tr>
+      <th scope="row">{{task.id}}</th>
+      <td>{{task.title}}</td>
+      {% if (task.priority == "high") %}
+        <td>{{'Alta'}}</td>
+        {% elseif (task.priority == "low") %}
+          <td>{{'Baja'}}</td>
+          {% elseif (task.priority == "medium") %}
+          <td>{{'Media'}}</td>
+      {% endif %}
+
+      <td>{{task.hours}}</td>
+
+      {# botones de ver y editar, eliminar #}
+      <td>
+      <button type="button" class="btn btn-success btn-sm"><a href="{{path('task_detail',{'id':task.id})}}">Ver</a></button>
+  
+       {% if app.user != null and task.user.id == app.user.id %}
+           <button type="button" class="btn btn-danger btn-sm"><a href="{{path('task_edit',{'id':task.id})}}">Editar</a></button>
+      <button type="button" class="btn btn-warning btn-sm"><a href="{{path('task_delete',{'id':task.id})}}">Eliminar</a></button>
+      {% endif %}
+       
+      </td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+
+<p style="text-align: center;">No hay tareas para mostrar en este momento</p>
+
+{% endif %}

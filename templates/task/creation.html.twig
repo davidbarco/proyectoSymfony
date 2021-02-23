@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if edit is defined %}
+    Editar tarea
+    {% else %}
+        Crear tarea 
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+
+<div class="example-wrapper">
+        {% if edit is defined %}
+        <h2 style="text-align:center; margin-bottom:35px; margin-top:40px;">Editar tarea</h2>
+        {% else %}
+          <h2 style="text-align:center; margin-bottom:35px; margin-top:40px;">Crear tarea</h2>
+         {% endif %}
+
+
+    {# imprimo mi formulario #}
+    {{form_start(form)}}
+     {{form_widget(form)}}
+      {{form_end(form)}}
+      
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}detalle de la tarea {% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h2 style="text-align:center; margin-bottom:35px; margin-top:40px;">{{task.title}}</h2>
+
+    <p>
+      Creada por: {{task.user.name}} {{task.user.surname}} |  en la fecha: {{task.createdAt|date('d/m/Y')}} | Prioridad: 
+      {% if (task.priority == "high") %}
+        <td>{{'Alta'}}</td>
+        {% elseif (task.priority == "low") %}
+          <td>{{'Baja'}}</td>
+          {% elseif (task.priority == "medium") %}
+          <td>{{'Media'}}</td>
+      {% endif %}
+      | {{task.hours}}h
+
+    </p>
+
+
+    <p>{{task.content}}<p>
+
+
+
+
+
+
+    
+</div>
+{% endblock %}
